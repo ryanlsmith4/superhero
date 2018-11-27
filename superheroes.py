@@ -96,6 +96,17 @@ class Hero:
             return False
 
 
+    def show_stats(self):
+        '''Prints stats for a individual hero'''
+        print(self.kills)
+        print(self.deaths)
+        if self.deaths > 0:
+            kd_ratio = self.kills/self.deaths
+        else:
+            kd_ratio = self.kills
+            print("{} K/D Ratio: {}".format(self.name, kd_ratio))
+
+
     def fight(self, opponent):
         '''
         Loop while both heros are alive then apply damage to
@@ -118,8 +129,8 @@ class Hero:
             print("{} has died in battle".format(opponent.name))
 
 
-
 class Ability:
+
     def __init__(self, name, attack_strength):
         '''initialize starting values name of ability, and attack and
         ability strength
@@ -165,6 +176,14 @@ class Team:
         return alive_list
 
 
+    def update_kills(self, kills):
+        '''
+        Updates a heroes kill count for kills made in team battles
+        '''
+        for hero in self.heroes:
+            hero.add_kill(kills)
+
+
     def attack(self, other_team):
         '''
         This function should randomly select
@@ -181,11 +200,6 @@ class Team:
             random_hero_1.fight(random_hero_2)
 
 
-
-
-
-
-
     def revive_heroes(self, health=100):
         '''method resets all heroes health to full'''
         for hero in self.heroes:
@@ -197,29 +211,14 @@ class Team:
         ratio for all Heroes
         '''
         for hero in self.heroes:
-            print("{}/{}".format(Hero.kills,Hero.deaths))
+            hero.show_stats()
 
 
     def add_hero(self, hero):
         '''Add Hero object to heroes list.'''
         self.heroes.append(hero)
 
-    #
-    # def remove_hero(self, name):
-    #         """
-    #         Remove hero from heroes list.
-    #         If Hero isn't found return 0.
-    #         """
-    #         index = 0
-    #         for hero in self.heroes:
-    #             if hero.name == name:
-    #                 self.heroes.pop(index)
-    #                 return
-    #             index += 1
-    #         return 0
 
-
-## TODO: Figure out why this method won't work!!!!!!
     def remove_hero(self, name):
         '''
         Remove hero from heroes list
@@ -336,100 +335,8 @@ class Arena:
 
 
 if __name__ == "__main__":
-    arena = Arena('Big Arena')
+    arena = Arena('The Colosseum')
     arena.build_team_one()
     arena.build_team_two()
     arena.team_battle()
     arena.show_stats()
-
-#     def user_input(self, prompt):
-#             user_input = input(prompt)
-#             return user_input
-#
-#     def create_ability(self):
-#         ability_name = self.user_input("Name your hero's ability: ")
-#         ability_strength = self.user_input("Strength of ability: ")
-#         ability = Abilities(str(ability_name), int(ability_strength))
-#         return ability
-#
-#     def create_weapon(self):
-#         weapon_name = self.user_input("Name your hero's weapon: ")
-#         weapon_strength = self.user_input("Strength of weapon: ")
-#         weapon = Weapon(str(weapon_name), int(weapon_strength))
-#         return weapon
-#
-#
-#     def create_armor(self):
-#         armor_name = self.user_input("Name your hero's armor: ")
-#         armor_strength = self.user_input("Strength of armor: ")
-#         armor = Armor(str(armor_name), int(armor_strength))
-#         return armor
-#
-#     def create_hero(self):
-#         hero_name = self.user_input("Name your hero: ")
-#         hero_health = self.user_input("Health of your Hero: ")
-#         hero = Hero(str(hero_name), int(hero_health))
-#
-#         # add_armors = self.user_input("would you like to add armor? Y/N ")
-#         # adding_armors = True
-#         # while adding_armors:
-#         #     if add_armors == "Y":
-#         #         armor = create_armor()
-#         #         hero.append(armor)
-#         #     else: keep_adding = False
-#         # add_weapons = self.user_input("Would you like to add weapons? Y/N")
-#         #
-#         # while
-#
-#
-#     def add_equipment(self):
-#         answer = self.user_input("Please add equipment, A for armors AB for abilities W for weapons and D for done: ")
-#         adding_equipments = True
-#         while adding_equipments:
-#             if answer.Upper() == 'A':
-#                 create_armor()
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#     def team_battle(self):
-#         deaths1 = 0
-#         deaths2 = 0
-#
-#         while deaths1 < len(self.team_one.heroes) and deaths2 < len(self.team_two.heroes):
-#         	self.team_one.attack(self.team_two)
-#         	self.team_two.attack(self.team_one)
-#         	for i in self.team_one.heroes:
-#         		deaths1 += i.deaths
-#         	for i in self.team_two.heroes:
-#         		deaths2 += i.deaths
-#
-#     def show_stats(self):
-#         print(self.team_one.name + " stats:")
-#         self.team_one.stats()
-#         print(self.team_two.name + " stats:")
-#         self.team_two.stats()
-#
-#
-#     def play_again(self):
-#         answer = self.user_input("Play again (y/n)? ")
-#         if answer == "y" or answer == "Y":
-#         	self.team_one.revive_heroes()
-#         	self.team_two.revive_heroes()
-#         	game_loop(self)
-#
-#
-# arena = Arena()
-#
-# def game_loop(arena):
-#     arena.create_hero()
-#
-#
-# game_loop(arena)
-#
-#
