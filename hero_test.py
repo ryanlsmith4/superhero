@@ -230,8 +230,7 @@ def test_team_remove_hero():
     team.add_hero(jodie)
     assert team.heroes[0].name == "Jodie Foster"
     team.remove_hero("Jodie Foster")
-    print("here {} ".format(len(team.heroes)))
-    print("Here {}".format(len(team.heroes)))
+    print("here {} ".format(team.heroes)) 
     assert len(team.heroes) == 0
 
 

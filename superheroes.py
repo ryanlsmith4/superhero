@@ -222,11 +222,20 @@ class Team:
     def remove_hero(self, name):
         '''
         Remove hero from heroes list
+        1. check if the length of heroes list if greater than zero
+        2. if length is zero, there are no heroes....return 0
+        3. actually remove the correct hero if present
         '''
-        if len(self.heroes) > 1:
-            # print(len(self.heroes))
-            self.heroes.remove(name)
-            return self.heroes
+
+        if not (len(self.heroes) > 0):
+            return 0
+
+        else:
+            for hero_obj in self.heroes:
+                if hero_obj.name == name:
+                    self.heroes.remove(hero_obj)
+                else:
+                    return 0
 
 
     def view_all_heroes(self):
